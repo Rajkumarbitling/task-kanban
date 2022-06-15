@@ -15,8 +15,8 @@ const dataset = {
         "column-1": { id: "column-1", bgcolor: "#15B5B0", title: "Project Overview", taskIds: ['task-1', 'task-2', 'task-3', 'task-4'] },
         "column-2": { id: "column-2", bgcolor: "#F9BDC0", title: "Tasks", taskIds: ['task-5'] },
         "column-3": { id: "column-3", bgcolor: "#FBE698", title: "In-Progress", taskIds: ['task-6','task-7'] },
-        "column-4": { id: "column-3", bgcolor: "#BD10E0", title: "In-Review", taskIds: ['task-8'] },
-        "column-5": { id: "column-3", bgcolor: "#A7EC60", title: "Completed", taskIds: ['task-9','task-10'] },
+        "column-4": { id: "column-4", bgcolor: "#BD10E0", title: "In-Review", taskIds: ['task-8'] },
+        "column-5": { id: "column-5", bgcolor: "#A7EC60", title: "Completed", taskIds: ['task-9','task-10'] },
     },
     columnOrder: ["column-1", "column-2", "column-3", "column-4", "column-5"]
 }
