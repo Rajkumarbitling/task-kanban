@@ -4,6 +4,7 @@ import Task from './Task';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { notifyError } from '../App';
 import { MaindataContext } from '../contexts/MaindataContext';
+import { Delete } from '@material-ui/icons';
 
 const Container = styled.div`
   margin: 10px;
@@ -132,6 +133,34 @@ const handleEdit = (taskId, input) => {
 
 }
 
+const handleColumnDelete = (e, columnId) => {
+  e.preventDefault();
+  
+  // delete from tasks
+  const taskArr = props.data.columns[columnId].taskIds;
+  const newTasks = Object.assign({}, props.data.tasks);
+  taskArr.forEach((object) => {
+    delete newTasks[object];
+  });
+
+  // delete from columns
+  const newColumns = Object.assign({}, props.data.columns);
+  delete newColumns[columnId];
+
+  // delete from ordered columnIds
+  const columnOrder = Array.from(props.data.columnOrder);
+  columnOrder.splice(columnOrder.indexOf(columnId), 1);
+
+  const newState = {
+    ...props.data,
+    tasks: newTasks,
+    columns: newColumns,
+    columnOrder: columnOrder,
+  };
+  props.setData(newState);
+  return;
+}
+
   return (
     <MaindataContext.Provider value={{ handleDelete }}>
       <Draggable
@@ -151,6 +180,10 @@ const handleEdit = (taskId, input) => {
                 {...provided.dragHandleProps}
               >
                 {props?.column?.title}
+                <Delete
+                  className="float-end cursor-pointer"
+                  onClick={(e) => handleColumnDelete(e, props.column.id)}
+                />
               </Title>
               <Droppable droppableId={props.column.id} type="task">
                 {(provided, snapshot) => {
